@@ -1,0 +1,1111 @@
+============================================================
+Animation_Curves_text #Animation_Curves_text.jsonl & Animation_Curves_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Data Type",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type",
+      "Variable Name"
+    ]
+  }
+}
+============================================================
+Asset_and_Tag_text #Asset_and_Tag_text.jsonl & Asset_and_Tag_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Asynchronous_Functions_text #Asynchronous_Functions_text.jsonl & Asynchronous_Functions_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Audio_text #Audio_text.jsonl & Audio_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Audioeffecttype Enum",
+      "Constant",
+      "Definition",
+      "Description",
+      "Effect",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Gain",
+      "Gain Calculation",
+      "Inverse Sawtooth",
+      "Level",
+      "Listener Mask",
+      "Member",
+      "Name",
+      "Offset",
+      "Pitch",
+      "Returns",
+      "Sawtooth",
+      "Sine",
+      "Square",
+      "Syntax",
+      "Triangle",
+      "Type",
+      "Variable"
+    ]
+  }
+}
+============================================================
+Buffer_text #Buffer_text.jsonl & Buffer_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Datatype Returned",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Cameras_And_Display_text #Cameras_And_Display_text.jsonl & Cameras_And_Display_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Cursor",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Milliseconds",
+      "Platform",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Code-Specific_Format_text #Code-Specific_Format_text.jsonl & Code-Specific_Format_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Code Example",
+      "Code Explanation",
+      "Code Snippet",
+      "Explanation",
+      "Name"
+    ]
+  }
+}
+============================================================
+Constant_Description_Data_text #Constant_Description_Data_text.jsonl & Constant_Description_Data_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Constant",
+      "Description"
+    ]
+  }
+}
+============================================================
+Constant_Description_Value_Data_text #Constant_Description_Value_Data_text.jsonl & Constant_Description_Value_Data_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Constant",
+      "Description",
+      "Value"
+    ]
+  }
+}
+============================================================
+Data_Structures_text #Data_Structures_text.jsonl & Data_Structures_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Debugging_text #Debugging_text.jsonl & Debugging_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Range",
+      "Returns",
+      "Syntax",
+      "Type",
+      "Variable"
+    ]
+  }
+}
+============================================================
+Drawing_text #Drawing_text.jsonl & Drawing_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Alignment",
+      "Argument",
+      "Blend Equation",
+      "Blend Factor (red, Green, Blue, Alpha)",
+      "Constant",
+      "Definition",
+      "Description",
+      "Equation",
+      "Examples",
+      "Examples Explanation",
+      "Extended Blend Mode",
+      "Formats",
+      "Function",
+      "Function Return",
+      "Key",
+      "Returns",
+      "Syntax",
+      "Type",
+      "Value",
+      "Variable"
+    ]
+  }
+}
+============================================================
+Extension_text #Extension_text.jsonl & Extension_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+File_handling_text #File_handling_text.jsonl & File_handling_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Font_text #Font_text.jsonl & Font_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Data Type",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type",
+      "Variable Name"
+    ]
+  }
+}
+============================================================
+Full_Example_Data_text #Full_Example_Data_text.jsonl & Full_Example_Data_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Definition",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax"
+    ]
+  }
+}
+============================================================
+Game_Input_text #Game_Input_text.jsonl & Game_Input_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Autocapitalization Type",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Gml Name",
+      "Keyboard Type",
+      "Option",
+      "Platform",
+      "Replacement Key",
+      "Return Type",
+      "Returns",
+      "Sdl Name",
+      "Syntax",
+      "Type",
+      "Unavailable Return Key"
+    ]
+  }
+}
+============================================================
+Garbage_collection_text #Garbage_collection_text.jsonl & Garbage_collection_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type",
+      "Variable"
+    ]
+  }
+}
+============================================================
+General_Game_Control_text #General_Game_Control_text.jsonl & General_Game_Control_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+GPU_State_DS_Map_Key_Data_text #GPU_State_DS_Map_Key_Data_text.jsonl & GPU_State_DS_Map_Key_Data_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Description",
+      "Key",
+      "Type"
+    ]
+  }
+}
+============================================================
+GXC_text #GXC_text.jsonl & GXC_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+HTML5_Valid_Targets_Description_Data_text #HTML5_Valid_Targets_Description_Data_text.jsonl & HTML5_Valid_Targets_Description_Data_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Description",
+      "Target"
+    ]
+  }
+}
+============================================================
+Instances_text #Instances_text.jsonl & Instances_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Joint_Constant_Data_text #Joint_Constant_Data_text.jsonl & Joint_Constant_Data_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Constant",
+      "Description",
+      "Read Only"
+    ]
+  }
+}
+============================================================
+Language_Features_text #Language_Features_text.jsonl & Language_Features_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Definition",
+      "Explaining Fifth Code Example (if Any)",
+      "Explaining First Code Example",
+      "Explaining Fourth Code Example (if Any)",
+      "Explaining Second Code Example (if Any)",
+      "Explaining Third Code Example (if Any)",
+      "Fifth Code Example (if Any)",
+      "First Code Example",
+      "Fourth Code Example (if Any)",
+      "Second Code Example (if Any)",
+      "Term",
+      "Third Code Example (if Any)"
+    ]
+  }
+}
+============================================================
+Layer_text #Layer_text.jsonl & Layer_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type",
+      "Value"
+    ]
+  }
+}
+============================================================
+Live_Wallpaper_text #Live_Wallpaper_text.jsonl & Live_Wallpaper_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Maths_And_Numbers_text #Maths_And_Numbers_text.jsonl & Maths_And_Numbers_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Movement_And_Collisions_text #Movement_And_Collisions_text.jsonl & Movement_And_Collisions_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Multi-task_Format_text #Multi-task_Format_text.jsonl & Multi-task_Format_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Code 1",
+      "Code 2",
+      "Code 3",
+      "Code 4",
+      "Description",
+      "Example 1",
+      "Example 2",
+      "Example 3",
+      "Example 4",
+      "Task Name"
+    ]
+  }
+}
+============================================================
+Networking_text #Networking_text.jsonl & Networking_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Setting",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Object_text #Object_text.jsonl & Object_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+OS_and_Compiler_text #OS_and_Compiler_text.jsonl & OS_and_Compiler_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Code",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Language",
+      "Operating System",
+      "Return Value (examples)",
+      "Returns",
+      "Syntax",
+      "Type",
+      "Version Name (version Number)"
+    ]
+  }
+}
+============================================================
+Path_text #Path_text.jsonl & Path_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Physics_text #Physics_text.jsonl & Physics_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Data Type",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Flag",
+      "Function",
+      "Read Only",
+      "Returns",
+      "Syntax",
+      "Type",
+      "Variable"
+    ]
+  }
+}
+============================================================
+Rooms_text #Rooms_text.jsonl & Rooms_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Data Type",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type",
+      "Variable Name"
+    ]
+  }
+}
+============================================================
+Script_text #Script_text.jsonl & Script_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Sequences_text #Sequences_text.jsonl & Sequences_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Broadcast Messages Example",
+      "Broadcast Messages Example Explanation",
+      "Broadcast Messages Explanation",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Moments Example",
+      "Moments Example Explanation",
+      "Moments Explanation",
+      "Returns",
+      "Sequence Events Example",
+      "Sequence Events Example Explanation",
+      "Sequence Events Explanation",
+      "Syntax",
+      "Type",
+      "Value",
+      "Variable"
+    ]
+  }
+}
+============================================================
+Shader_text #Shader_text.jsonl & Shader_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Blue Lowest Bit",
+      "Constant",
+      "Corner Id",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Position",
+      "Red Lowest Bit",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Sprites_text #Sprites_text.jsonl & Sprites_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type",
+      "Value",
+      "Variable"
+    ]
+  }
+}
+============================================================
+Static_Struct_text #Static_Struct_text.jsonl & Static_Struct_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "A Fourth Example Compounding From Previous Explanation (if Any)",
+      "A Second Example Compounding From Previous Explanation (if Any)",
+      "A Third Example Compounding From Previous Explanation (if Any)",
+      "Example For Explanation",
+      "Explanation",
+      "More Information Explaining Previous Action Example For Explanation",
+      "More Information Explaining The Fourth Example (if Any)",
+      "More Information Explaining The Second Example (if Any)",
+      "More Information Explaining The Third Example (if Any)"
+    ]
+  }
+}
+============================================================
+Strings_text #Strings_text.jsonl & Strings_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+StructPointer_Data_text #StructPointer_Data_text.jsonl & StructPointer_Data_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Description",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Struct_Forbidden_Variables_text #Struct_Forbidden_Variables_text.jsonl & Struct_Forbidden_Variables_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Cannot Be Used As Struct Member Variables. Only Local And Instance Scope Built In Variables Can Be Used This Way And Assigned Values As If They Were Regular Struct Member Variables. Using Global Scope Built In Variables Is Forbidden And Will Cause Issues"
+    ]
+  }
+}
+============================================================
+Struct_Variable_Type_Data_text #Struct_Variable_Type_Data_text.jsonl & Struct_Variable_Type_Data_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Description",
+      "Type",
+      "Variable"
+    ]
+  }
+}
+============================================================
+Terms_and_Definitions_text #Terms_and_Definitions_text.jsonl & Terms_and_Definitions_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Definition",
+      "Term"
+    ]
+  }
+}
+============================================================
+Text_Alignment_Constant_Data_text #Text_Alignment_Constant_Data_text.jsonl & Text_Alignment_Constant_Data_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Alignment",
+      "Constant"
+    ]
+  }
+}
+============================================================
+Tilset_text #Tilset_text.jsonl & Tilset_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Data Type",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type",
+      "Variable Name"
+    ]
+  }
+}
+============================================================
+Timeline_text #Timeline_text.jsonl & Timeline_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Time_Sources_text #Time_Sources_text.jsonl & Time_Sources_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type",
+      "Value"
+    ]
+  }
+}
+============================================================
+Variables_text #Variables_text.jsonl & Variables_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Abyss For Variable",
+      "Cleft Example For Variable",
+      "Definition",
+      "Depth Of Variable",
+      "Example Of That Type Of Variable",
+      "Explaining Depth",
+      "Explaining The Abyss Example",
+      "Explaining The Cleft Example",
+      "Explaining The Example (if Any)",
+      "Explaining The Final Example",
+      "Final Example",
+      "Type Of Variable"
+    ]
+  }
+}
+============================================================
+Variable_Functions_text #Variable_Functions_text.jsonl & Variable_Functions_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "String",
+      "Syntax",
+      "Type"
+    ]
+  }
+}
+============================================================
+Variable_Name_Data_Type_Description_Data_text #Variable_Name_Data_Type_Description_Data_text.jsonl & Variable_Name_Data_Type_Description_Data_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Data Type",
+      "Description",
+      "Variable Name"
+    ]
+  }
+}
+============================================================
+Web_and_HTML5_text #Web_and_HTML5_text.jsonl & Web_and_HTML5_text_texted.txt
+
+{
+  "id",
+  "sheet",
+  "text": {
+    "text_fields": [
+      "Argument",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Parameters",
+      "Returns",
+      "Syntax",
+      "Target",
+      "Type"
+    ]
+  }
+}
+============================================================
