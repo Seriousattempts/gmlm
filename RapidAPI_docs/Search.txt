@@ -1,0 +1,188 @@
+# POST /v1/search - User Documentation
+
+## **Purpose**
+The `/v1/search` endpoint provides advanced search capabilities with complex filtering, field selection, and pagination for JSONL datasets. It allows precise control over search criteria and response format.
+
+## **Prerequisites**
+**Data must be loaded first** using `POST /v1/load/{file_name}` before using this endpoint.
+
+## **Request Structure**
+
+### **URL**
+```
+POST /v1/search
+```
+
+### **Headers**
+```
+Content-Type: application/json
+```
+
+### **Request Body Schema**
+```json
+{
+  "query": "string (optional)",
+  "filters": "object (optional)",
+  "fields": "array of strings (optional)", 
+  "limit": "number (optional, 1-100, default: 20)",
+  "offset": "number (optional, default: 0)"
+}
+```
+
+## **Parameters Explained**
+
+### **`query` (String, Optional)**
+- **Purpose**: Full-text search across ALL text fields
+- **Behavior**: Case-insensitive substring matching
+- **Example**: `"query": "animcurve"` searches for "animcurve" in Function, Definition, Examples, etc.
+
+### **`filters` (Object, Optional)**
+- **Purpose**: Target specific fields with exact filtering
+- **Format**: `{"text.FieldName": "search_term", "metadata_field": "value"}`
+- **Available Fields**: Use `GET /v1/schema` to see current `text_fields`
+- **Behavior**: Case-insensitive substring matching per field
+
+### **`fields` (Array, Optional)**
+- **Purpose**: Return only specified text fields (reduces response size)
+- **Example**: `["Function", "Definition", "Syntax"]`
+- **Default**: Returns all available text fields if not specified
+
+### **`limit` & `offset`**
+- **Purpose**: Pagination control
+- **Range**: limit: 1-100, offset: 0+
+- **Example**: `"limit": 10, "offset": 20` gets records 21-30
+
+## **Available Filter Fields**
+Animation_Curves_text.jsonl:
+- `text.Function` - Function names
+- `text.Definition` - Function definitions  
+- `text.Syntax` - Function syntax
+- `text.Returns` - Return types
+- `text.Examples` - Code examples
+- `text.Examples Explanation` - Example explanations
+
+## **Working Examples**
+
+### **1. Simple Full-Text Search**
+```json
+{
+  "query": "animcurve",
+  "limit": 5
+}
+```
+**Result**: Returns 5 records containing "animcurve" anywhere in text fields
+
+### **2. Combined Search with Field Selection**  
+```json
+{
+  "query": "channel",
+  "filters": {
+    "text.Function": "animcurve"
+  },
+  "fields": ["Function", "Examples"],
+  "limit": 5
+}
+```
+**Result**: Returns 5 records where:
+- Text contains "channel" AND
+- Function field contains "animcurve"
+- Only Function and Examples fields returned
+
+### **3. Pagination Example**
+```json
+{
+  "query": "animcurve",
+  "limit": 3,
+  "offset": 6
+}
+```
+**Result**: Returns records 7-9 from "animcurve" search results
+
+## **Response Format**
+
+### **Successful Response (200 OK)**
+```json
+{
+  "data": [
+    {
+      "id": "Animation_Curves",
+      "sheet": "Animation curves",
+      "text": {
+        "Function": "animcurve_channel_evaluate",
+        "Definition": "this function gets the value...",
+        "Examples": "var _channel = animcurve_get_channel..."
+      },
+      "metadata": {}
+    }
+  ],
+  "meta": {
+    "total": 8,
+    "offset": 0, 
+    "limit": 5,
+    "current_file": "Animation_Curves_text.jsonl"
+  },
+  "errors": null
+}
+```
+
+### **Empty Results**
+```json
+{
+  "data": [],
+  "meta": {
+    "total": 0,
+    "offset": 0,
+    "limit": 10,
+    "current_file": "Animation_Curves_text.jsonl"  
+  },
+  "errors": null
+}
+```
+
+## **Search Behavior Analysis**
+
+### **Why Some Searches Return 0 Results**
+
+1. **Field Name Mismatch**: 
+   - ❌ `"text.Type": "real"` - "Type" field may not exist in this dataset
+   - ✅ Use `GET /v1/schema` to verify available fields
+
+2. **Exact Field Content**: 
+   - Filters look for substring matches within specific fields
+   - If the field doesn't contain the search term, no results return
+
+3. **Multiple Filter Logic**:
+   - All filters must match (AND logic)
+   - More filters = more restrictive results
+
+### **Search Strategy Tips**
+
+**For Broad Results:**
+- Use `query` parameter only
+- Example: `{"query": "animcurve"}` 
+
+**For Precise Results:**
+- Combine `query` + specific `filters`
+- Example: `{"query": "channel", "filters": {"text.Function": "animcurve"}}`
+
+**For Performance:**
+- Use `fields` parameter to limit returned data
+- Use appropriate `limit` values
+
+## **Error Handling**
+
+### **400 Bad Request**
+```json
+{
+  "detail": "No JSONL file loaded"
+}
+```
+**Solution**: Load data first with `POST /v1/load/{file_name}`
+
+### **Invalid Fields Error**
+```json
+{
+  "detail": "Invalid text fields: ['NonExistent']. Available fields: ['Function', 'Definition', ...]"
+}
+```
+**Solution**: Use `GET /v1/schema` to see valid field names

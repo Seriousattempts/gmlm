@@ -1,0 +1,326 @@
+# GET /v1/schema - User Documentation
+
+## **Purpose**
+The `/v1/schema` endpoint returns comprehensive schema information about the currently loaded JSONL dataset. This endpoint is essential for understanding the structure and available fields of your data before performing searches or queries.
+
+## **Prerequisites**
+**Data must be loaded first** using `POST /v1/load/{file_name}` before using this endpoint.
+
+## **Request Structure**
+
+### **URL**
+```
+GET /v1/schema
+```
+
+### **Method**
+`GET`
+
+### **Headers**
+None required - uses standard HTTP headers only.
+
+### **Parameters**
+None - This endpoint accepts no query parameters, path parameters, or request body.
+
+## **Request Examples**
+
+### **Simple cURL Request**
+```bash
+curl -X GET "https://your-api-domain.com/v1/schema"
+```
+
+### **JavaScript Fetch**
+```javascript
+fetch('https://your-api-domain.com/v1/schema')
+  .then(response => response.json())
+  .then(schema => console.log('Dataset Schema:', schema));
+```
+
+### **Python Requests**
+```python
+import requests
+
+response = requests.get('https://your-api-domain.com/v1/schema')
+schema_data = response.json()
+print(f"Available fields: {schema_data['data']['text_fields']}")
+```
+
+## **Response Format**
+
+### **Successful Response (200 OK)**
+```json
+{
+  "data": {
+    "text_fields": [
+      "Constant",
+      "Description"
+    ],
+    "current_file": "Constant_Description_Data_text.jsonl",
+    "sample_record": {
+      "id": "Buffer",
+      "text": {
+        "Constant": "buffer_fixed",
+        "Description": "a buffer of fixed size."
+      },
+      "sheet": "Buffer Type Constantant"
+    },
+    "total_records": 480,
+    "metadata_fields": [
+      "id",
+      "sheet"
+    ]
+  },
+  "meta": null,
+  "errors": null
+}
+```
+
+## **Response Fields Explained**
+
+### **`current_file` (String)**
+- **Purpose**: Name of the currently loaded JSONL dataset
+- **Example**: `"Constant_Description_Data_text.jsonl"`
+- **Usage**: Confirms which dataset is active and loaded
+
+### **`text_fields` (Array of Strings)**
+- **Purpose**: Lists all searchable text fields available in the dataset
+- **Usage**: Essential for building filters and field selection
+- **Note**: These vary between different JSONL files
+- **Filter Format**: Use as `text.{field_name}` in searches
+
+### **`metadata_fields` (Array of Strings)**
+- **Purpose**: Lists metadata fields that identify and categorize records
+- **Common Fields**: `["id", "sheet"]`
+- **Usage**: Can be used for filtering without `text.` prefix
+
+### **`total_records` (Number)**
+- **Purpose**: Total number of records available for querying
+- **Example**: `480`
+- **Usage**: Plan pagination and understand dataset size
+
+### **`sample_record` (Object)**
+- **Purpose**: Shows the actual structure and content of a typical record
+- **Usage**: Understand data format and field content examples
+- **Structure**:
+  - `id` - Record identifier
+  - `sheet` - Data category/sheet name
+  - `text` - Object containing all text fields with sample content
+
+## **Use Cases**
+
+### **1. Field Discovery for Dynamic Filtering**
+```javascript
+// Get available fields before building search interface
+const schema = await fetch('/v1/schema').then(r => r.json());
+const availableFields = schema.data.text_fields;
+
+// Build dynamic filter UI
+availableFields.forEach(field => {
+  createFilterOption(`text.${field}`, field);
+});
+```
+
+### **2. Query Planning**
+```javascript
+// Check dataset size before querying
+const schema = await fetch('/v1/schema').then(r => r.json());
+const totalRecords = schema.data.total_records;
+
+if (totalRecords > 10000) {
+  // Use pagination for large datasets
+  const pageSize = 50;
+} else {
+  // Can query all at once for small datasets
+  const pageSize = totalRecords;
+}
+```
+
+### **3. Field Validation**
+```javascript
+// Validate user input against available fields
+function validateSearchFields(requestedFields, schema) {
+  const available = schema.data.text_fields;
+  const invalid = requestedFields.filter(field => !available.includes(field));
+  
+  if (invalid.length > 0) {
+    throw new Error(`Invalid fields: ${invalid.join(', ')}`);
+  }
+}
+```
+
+### **4. Dataset Information Display**
+```javascript
+// Show dataset info to users
+function displayDatasetInfo(schema) {
+  return {
+    name: schema.data.current_file,
+    recordCount: schema.data.total_records.toLocaleString(),
+    availableFields: schema.data.text_fields.length,
+    searchableFields: schema.data.text_fields.join(', ')
+  };
+}
+```
+
+## **Integration Patterns**
+
+### **Schema-First Development**
+```javascript
+// Always check schema before performing operations
+async function smartSearch(query, filters = {}) {
+  // Get current schema
+  const schema = await fetch('/v1/schema').then(r => r.json());
+  
+  // Validate filters against available fields
+  validateFilters(filters, schema.data.text_fields);
+  
+  // Perform search with validated fields
+  return await searchWithFilters(query, filters);
+}
+```
+
+### **Dynamic UI Generation**
+```javascript
+// Build search interface based on schema
+async function buildSearchInterface() {
+  const schema = await fetch('/v1/schema').then(r => r.json());
+  
+  // Create filter inputs for each text field
+  schema.data.text_fields.forEach(field => {
+    addFilterInput(field, `Filter by ${field}`);
+  });
+  
+  // Show dataset info
+  updateDatasetInfo(schema.data);
+}
+```
+
+### **Field Auto-completion**
+```javascript
+// Provide field suggestions in search UI
+async function getFieldSuggestions() {
+  const schema = await fetch('/v1/schema').then(r => r.json());
+  return schema.data.text_fields.map(field => ({
+    value: `text.${field}`,
+    label: field,
+    description: getFieldDescription(field, schema.data.sample_record)
+  }));
+}
+```
+
+## **Error Handling**
+
+### **No Data Loaded (400 Bad Request)**
+```json
+{
+  "detail": "No JSONL file loaded"
+}
+```
+**Solution**: Load data first using `POST /v1/load/{file_name}`
+
+### **Server Error (500)**
+```json
+{
+  "detail": "Failed to load files: [error details]"
+}
+```
+**Solution**: Check server logs, verify data file integrity
+
+## **Practical Examples**
+
+### **Before Building Search Queries**
+```javascript
+// Step 1: Load data
+await fetch('/v1/load/Constant_Description_Data_text.jsonl', {method: 'POST'});
+
+// Step 2: Get schema
+const schema = await fetch('/v1/schema').then(r => r.json());
+
+// Step 3: Build query using available fields
+const searchQuery = {
+  query: "animcurve",
+  filters: {
+    [`text.${schema.data.text_fields[0]}`]: "channel"
+  },
+  fields: schema.data.text_fields.slice(0, 3)
+};
+```
+
+### **Dataset Comparison**
+```javascript
+// Compare different datasets
+async function compareDatasets() {
+  const datasets = ['Constant_Description_Data_text.jsonl', 'Constant_Description_Value_Data_text.jsonl'];
+  
+  for (const dataset of datasets) {
+    await fetch(`/v1/load/${dataset}`, {method: 'POST'});
+    const schema = await fetch('/v1/schema').then(r => r.json());
+    
+    console.log(`${dataset}:`, {
+      records: schema.data.total_records,
+      fields: schema.data.text_fields.length,
+      fieldNames: schema.data.text_fields
+    });
+  }
+}
+```
+
+### **Smart Field Selection**
+```javascript
+// Automatically select most relevant fields
+function selectRelevantFields(schema, searchTerm) {
+  const commonFields = ['Function', 'Definition', 'Description'];
+  const availableFields = schema.data.text_fields;
+  
+  // Prioritize common fields that exist in this dataset
+  return commonFields.filter(field => availableFields.includes(field));
+}
+```
+
+## **Best Practices**
+
+### **1. Cache Schema Information**
+```javascript
+// Cache schema to avoid repeated calls
+let cachedSchema = null;
+let lastFile = null;
+
+async function getSchema() {
+  const health = await fetch('/v1/health').then(r => r.json());
+  
+  if (health.loaded_file !== lastFile) {
+    cachedSchema = await fetch('/v1/schema').then(r => r.json());
+    lastFile = health.loaded_file;
+  }
+  
+  return cachedSchema;
+}
+```
+
+### **2. Validate Before Operations**
+```javascript
+// Always validate against schema
+async function validateOperation(operation) {
+  const schema = await getSchema();
+  
+  if (operation.filters) {
+    validateFilters(operation.filters, schema.data.text_fields);
+  }
+  
+  if (operation.fields) {
+    validateFields(operation.fields, schema.data.text_fields);
+  }
+}
+```
+
+### **3. Handle Schema Changes**
+```javascript
+// Detect when schema changes (different dataset loaded)
+let currentSchema = null;
+
+async function checkSchemaChanged() {
+  const newSchema = await fetch('/v1/schema').then(r => r.json());
+  const changed = currentSchema?.data.current_file !== newSchema.data.current_file;
+  currentSchema = newSchema;
+  return changed;
+}
+```

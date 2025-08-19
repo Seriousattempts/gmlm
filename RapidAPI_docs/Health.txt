@@ -1,0 +1,71 @@
+# GET /v1/health - User Documentation
+
+## **Purpose**
+The `/v1/health` endpoint provides a simple health check for the API, returning current status, timestamp, and information about loaded data. This endpoint is primarily used for monitoring, debugging, and verifying API availability.
+
+## **Prerequisites**
+- This endpoint works independently and does not require any data to be loaded first.
+
+## **Request Structure**
+
+### **URL**
+```
+GET /v1/health
+```
+
+### **Method**
+`GET`
+
+### **Headers**
+None required - uses standard HTTP headers only.
+
+### **Parameters**
+None - This endpoint accepts no query parameters, path parameters, or request body.
+
+## **Request Examples**
+
+### **Simple cURL Request**
+```bash
+curl -X GET "https://your-api-domain.com/v1/health"
+```
+
+### **JavaScript Fetch**
+```javascript
+fetch('https://your-api-domain.com/v1/health')
+  .then(response => response.json())
+  .then(data => console.log('API Health:', data));
+```
+
+### **Python Requests**
+```python
+import requests
+
+response = requests.get('https://your-api-domain.com/v1/health')
+health_data = response.json()
+print(health_data)
+```
+
+## **Response Format**
+
+### **Successful Response (200 OK)**
+
+#### **When No Data is Loaded**
+```json
+{
+  "status": "healthy",
+  "timestamp": "2025-08-18T20:00:00.000Z",
+  "loaded_file": null,
+  "records_count": 0
+}
+```
+
+#### **When Data is Loaded**
+```json
+{
+  "status": "healthy",
+  "timestamp": "2025-08-18T20:01:33.100484",
+  "loaded_file": "Animation_Curves_text.jsonl",
+  "records_count": 33
+}
+```
+

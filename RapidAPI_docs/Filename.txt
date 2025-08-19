@@ -1,0 +1,203 @@
+# POST /v1/load/{file_name} - User Documentation
+
+## **Purpose**
+The `POST /v1/load/{file_name}` endpoint loads a JSONL dataset and its corresponding schema file into the API for querying. This endpoint initializes the API with your chosen dataset, making all other data endpoints available for use.
+
+## **Prerequisites**
+Choose the available .jsonl file to load
+
+## **Request Structure**
+
+### **URL**
+```
+POST /v1/load/{file_name}
+```
+
+### **Path Parameters**
+| Name | Type | Description | Required | Default Example |
+|------|------|-------------|----------|-----------------|
+| `file_name` | **STRING** | Name of JSONL file to load (without .jsonl extension) | **Yes** | `StructPointer_Data_text.jsonl` |
+
+### **Headers**
+- No special headers required
+- Standard HTTP headers are sufficient
+
+### **Request Body**
+- **No request body required**
+- This is a simple POST request with only the path parameter
+
+## **How It Works**
+
+When you call this endpoint, the API:
+
+1. **Locates Files**: Searches for `{file_name}.jsonl` and `{file_name}_texted.txt`
+2. **Loads Schema**: Reads the schema file to understand available text fields
+3. **Parses JSONL**: Processes the data file (handles both standard and concatenated JSONL formats)
+4. **Discovers Structure**: Auto-detects metadata fields from the first record
+5. **Activates Dataset**: Makes the loaded data available for all query endpoints
+
+## **Example**
+
+```bash
+POST /v1/load/Layer_text.jsonl
+```
+
+
+### **JavaScript Example**
+```javascript
+const response = await fetch('/v1/load/Layer_text.jsonl', {
+  method: 'POST'
+});
+const result = await response.json();
+console.log(`Loaded ${result.data.records_count} records`);
+```
+
+### **Python Example**
+```python
+import requests
+
+response = requests.post('/v1/load/Layer_text.jsonl')
+data = response.json()
+print(f"Successfully loaded: {data['data']['message']}")
+print(f"Available fields: {data['data']['text_fields']}")
+```
+
+## **Response Format**
+
+### **Successful Response (200 OK)**
+```json
+{
+  "data": {
+    "message": "Successfully loaded Layer_text.jsonl",
+    "text_fields": [
+      "Argument",
+      "Constant",
+      "Definition",
+      "Description",
+      "Examples",
+      "Examples Explanation",
+      "Function",
+      "Returns",
+      "Syntax",
+      "Type",
+      "Value"
+    ],
+    "records_count": 581
+  },
+  "meta": null,
+  "errors": null
+}
+```
+
+### **Response Fields Explained**
+- **`message`**: Confirmation of successful load with filename
+- **`records_count`**: Total number of records loaded from the JSONL file
+- **`text_fields`**: Array of searchable text fields available in this dataset
+
+### **Layer_text.jsonl**
+- **Records**: 2100
+
+## **Error Handling**
+
+### **JSONL File Not Found (404)**
+```json
+{
+  "detail": "JSONL file not found: {filename}"
+}
+```
+**Solution**: Ensure the JSONL file exists on the server with the exact filename
+
+### **Schema File Not Found (404)**
+```json
+{
+  "detail": "Schema file not found: {filename}"
+}
+```
+**Solution**: Ensure the corresponding `{filename}_texted.txt` schema file exists
+
+### **File Loading Error (500)**
+```json
+{
+  "detail": "Failed to load files: [specific error details]"
+}
+```
+**Solutions**: 
+- Check file format and JSON validity
+- Verify file permissions
+- Ensure sufficient server memory
+
+
+## **Example use case**
+
+### **1. Verifying Load Success**
+Always check the response to confirm successful loading:
+```javascript
+const response = await fetch('/v1/load/Layer_text.jsonl', {method: 'POST'});
+const data = await response.json();
+
+if (data.data && data.data.records_count > 0) {
+  console.log(`✅ Successfully loaded ${data.data.records_count} records`);
+  console.log(`Available fields: ${data.data.text_fields.join(', ')}`);
+} else {
+  console.error('❌ Failed to load dataset');
+}
+```
+
+### **2. Immediate Schema Verification**
+After loading, verify the dataset with the schema endpoint:
+```javascript
+// Load dataset
+await fetch('/v1/load/Layer_text.jsonl', {method: 'POST'});
+
+// Verify it loaded correctly
+const schema = await fetch('/v1/schema').then(r => r.json());
+console.log(`Active dataset: ${schema.data.current_file}`);
+```
+
+### **3. Handle Loading States**
+```javascript
+async function loadDatasetSafely(filename) {
+  try {
+    console.log(`Loading ${filename}...`);
+    
+    const response = await fetch(`/v1/load/${filename}`, {method: 'POST'});
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    console.log(`✅ Loaded ${data.data.records_count} records`);
+    console.log(`📋 Available fields: ${data.data.text_fields.join(', ')}`);
+    
+    return data;
+  } catch (error) {
+    console.error(`❌ Failed to load ${filename}:`, error);
+    throw error;
+  }
+}
+```
+
+## **Workflow Integration**
+
+### **Complete API Usage Pattern**
+```javascript
+async function initializeAPI() {
+  // 1. Load dataset
+  await loadDatasetSafely('Layer_text.jsonl');
+  
+  // 2. Verify schema
+  const schema = await fetch('/v1/schema').then(r => r.json());
+  console.log(`Active: ${schema.data.current_file}`);
+  
+  // 3. Now safe to query data
+  const records = await fetch('/v1/records?page=1&page_size=10').then(r => r.json());
+  console.log(`Retrieved ${records.data.length} records`);
+}
+```
+
+## **Considerations**
+
+- **Loading Time**: Varies by file size (2100 records ~1-2 seconds, 3996 records ~2-4 seconds)
+- **Memory Usage**: Entire dataset is loaded into memory for fast querying
+- **Session Persistence**: Loaded dataset remains active until server restart or new dataset loaded
+- **Concurrent Access**: All API users share the same loaded dataset

@@ -1,0 +1,213 @@
+# GET /v1/records - User Documentation
+
+## **Purpose**
+The `GET /v1/records` endpoint retrieves records from the currently loaded JSONL dataset with full pagination, field selection, and search capabilities. This is your primary endpoint for browsing and exploring data across the entire dataset.
+
+## **Prerequisites**
+**Data must be loaded first** using `POST /v1/load/{file_name}` before using this endpoint.
+
+## **Request Structure**
+
+### **URL**
+```
+GET /v1/records
+```
+
+### **Query Parameters**
+| Name | Type | Required | Description | Default |
+|------|------|----------|-------------|---------|
+| `page` | **NUMBER** | No | Page number for pagination (starts at 1) | 1 |
+| `page_size` | **NUMBER** | No | Number of records per page (1-100) | 20 |
+| `fields` | **STRING** | No | Comma-separated text fields to return | All fields |
+| `q` | **STRING** | No | Full-text search query across all text fields | None |
+
+⚠️ **Note**: Complex filtering like `text.Function` is not supported in RapidAPI query parameters when I tested it. Use the `q` parameter for full-text search instead.
+
+## **Example**
+```bash
+GET /v1/records?fields=Function,Examples&page=3&page_size=5
+```
+
+This request retrieves page 3 with 5 records per page, returning only the `Function` and `Examples` fields.
+
+## **Response**
+```json
+{
+  "data": [
+    {
+      "id": "Sprites",
+      "text": {
+        "Examples": "var list = ds_list_create();\nskeleton_animation_list(sprite_index, list);\nfor (var i = 1; i < ds_list_size(list); i++;)\n{\nskeleton_animation_mix(list[| 0], list[| i], 0.5);\n}\nds_list_destroy(list);",
+        "Function": "skeleton_animation_list"
+      },
+      "sheet": "Sprites",
+      "metadata": {}
+    },
+    {
+      "id": "Sprites",
+      "text": {
+        "Examples": "skeleton_animation_set(\"walk\");\nskeleton_animation_mix(\"walk\", \"jump\", 0.2);\nskeleton_animation_mix(\"jump\", \"walk\", 0.4);",
+        "Function": "skeleton_animation_mix"
+      },
+      "sheet": "Sprites",
+      "metadata": {}
+    },
+    {
+      "id": "Sprites",
+      "text": {
+        "Examples": "if keyboard_check_pressed(vk_space)\n{\nif skeleton_animation_get() != \"jump\"\n{\nskeleton_animation_set(\"jump\");\n}\n}",
+        "Function": "skeleton_animation_set"
+      },
+      "sheet": "Sprites",
+      "metadata": {}
+    },
+    {
+      "id": "Sprites",
+      "text": {
+        "Examples": "if (mouse_check_button(mb_left))\n{\nskeleton_animation_set_ext(\"bodyfight\", 1);\n}\nelse\n{\nskeleton_animation_set_ext(\"bodywalk\", 1);\n}",
+        "Function": "skeleton_animation_set_ext"
+      },
+      "sheet": "Sprites",
+      "metadata": {}
+    },
+    {
+      "id": "Sprites",
+      "text": {
+        "Examples": "if (global.pause)\n{\nskeleton_animation_set_frame(0, -image_speed);\n}",
+        "Function": "skeleton_animation_set_frame"
+      },
+      "sheet": "Sprites",
+      "metadata": {}
+    }
+  ],
+  "meta": {
+    "page": 3,
+    "total": 411,
+    "page_size": 5,
+    "total_pages": 83,
+    "current_file": "Sprites_text.jsonl",
+    "search_query": null,
+    "filters_applied": {
+      "text": {}
+    }
+  },
+  "errors": null
+}
+```
+
+## **JavaScript Examples**
+
+### **Basic Pagination**
+```javascript
+// Get first page of records
+async function getFirstPage() {
+  const response = await fetch('/v1/records?page=1&page_size=10');
+  const data = await response.json();
+  
+  console.log(`Page ${data.meta.page} of ${data.meta.total_pages}`);
+  console.log(`Showing ${data.data.length} of ${data.meta.total} total records`);
+  
+  return data.data;
+}
+
+// Navigate through pages
+async function getAllPages() {
+  let allRecords = [];
+  let page = 1;
+  let hasMore = true;
+  
+  while (hasMore) {
+    const response = await fetch(`/v1/records?page=${page}&page_size=50`);
+    const data = await response.json();
+    
+    allRecords.push(...data.data);
+    hasMore = page  ({
+    name: record.text.Function,
+    description: record.text.Definition
+  }));
+}
+
+// Search with field selection
+async function searchFunctions(searchTerm) {
+  const encodedTerm = encodeURIComponent(searchTerm);
+  const response = await fetch(`/v1/records?q=${encodedTerm}&fields=Function,Examples&page_size=20`);
+  const data = await response.json();
+  
+  console.log(`Found ${data.meta.total} functions matching "${searchTerm}"`);
+  return data.data;
+}
+```
+
+## **Python Examples**
+
+### **Basic Pagination**
+```python
+import requests
+import urllib.parse
+
+# Get first page of records
+def get_first_page():
+    response = requests.get('/v1/records', params={
+        'page': 1,
+        'page_size': 10
+    })
+    data = response.json()
+    
+    print(f"Page {data['meta']['page']} of {data['meta']['total_pages']}")
+    print(f"Showing {len(data['data'])} of {data['meta']['total']} total records")
+    
+    return data['data']
+
+# Get all records across pages
+def get_all_records():
+    all_records = []
+    page = 1
+    
+    while True:
+        response = requests.get('/v1/records', params={
+            'page': page,
+            'page_size': 50
+        })
+        data = response.json()
+        
+        all_records.extend(data['data'])
+        
+        print(f"Loaded page {page}/{data['meta']['total_pages']}")
+        
+        if page >= data['meta']['total_pages']:
+            break
+        page += 1
+    
+    return all_records
+```
+
+### **Field Selection and Search**
+```python
+# Get specific fields only
+def get_function_list():
+    response = requests.get('/v1/records', params={
+        'fields': 'Function,Definition',
+        'page_size': 100
+    })
+    data = response.json()
+    
+    return [
+        {
+            'name': record['text']['Function'],
+            'description': record['text']['Definition']
+        }
+        for record in data['data']
+    ]
+
+# Search with field selection
+def search_functions(search_term):
+    response = requests.get('/v1/records', params={
+        'q': search_term,
+        'fields': 'Function,Examples',
+        'page_size': 20
+    })
+    data = response.json()
+    
+    print(f"Found {data['meta']['total']} functions matching '{search_term}'")
+    return data['data']
+```
