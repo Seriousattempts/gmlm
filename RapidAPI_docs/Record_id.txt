@@ -1,27 +1,27 @@
 # GET /v1/records/{record_id} - User Documentation
 
 ## **Purpose**
-The `/v1/records/{record_id}` endpoint retrieves **all records** that match the specified record ID using pagination. This provides access to complete datasets when multiple records share the same ID, replacing the previous single-record behavior.
+The `/v1/records/{record_id}` endpoint retrieves **a single specific record** by its unique ID. This is a direct lookup operation that returns one record or a 404 error if the record doesn't exist.
 
 ## **Prerequisites**
 1. **Load your dataset** using `POST /v1/load/{file_name}` before using this endpoint.
 2. **Immediately verify** the load using `GET /v1/schema` after using /v1/load (contains text_fields accessibility that's needed via _texted.txt)
-3. Query records using `GET /v1/records/{record_id}`
+3. Query a specific record using `GET /v1/records/{record_id}`
 
 ### **URL**
 ```
 GET /v1/records/{record_id}
 ```
 
-### **Query Parameters**
-| Name | Type | Description | Default | Range |
-|------|------|-------------|---------|--------|
-| `page` | **NUMBER** | Page number for pagination | 1 | 1+ |
-| `page_size` | **NUMBER** | Records per page | 20 | 1-100 |
-| `fields` | **STRING** | Comma-separated text fields to return | All fields | Optional |
-| `q` | **STRING** | Full-text search query across all text fields | None | Optional |
+### **Path Parameters**
+| Name | Type | Description | Required |
+|------|------|-------------|----------|
+| `record_id` | **STRING** | The unique ID of the record to retrieve | Yes |
 
-⚠️ **Note**: Advanced filtering like `text.Function` is not supported in RapidAPI query parameters. Use the `q` parameter for full-text search instead.
+### **Query Parameters**
+**None** - This endpoint does not support query parameters like pagination, filtering, or field selection.
+
+⚠️ **Note**: Unlike `/v1/records`, this endpoint does not support pagination, filtering, or field selection. It returns the complete record with all available text fields.
 
 ## **Dataset-Specific Text Fields**
 
@@ -87,86 +87,65 @@ GET /v1/schema
 }
 ```
 
-### **Step 3: Query Records with Pagination**
+### **Step 3: Query Specific Record by ID**
 ```bash
-GET /v1/records/?sort_order&fields=Definition%2CSyntax&sort_by=asec&q=Physics&page_size=5
+GET /v1/records/Physics
 ```
 
 **Successful Response:**
 ```json
 {
-  "data": [
-    {
-      "id": "Path",
-      "text": {
-        "Syntax": "path_rotate(index, angle);",
-        "Definition": "you can use this function to rotate a given path around its center. remember that in gamemaker (unless you are using physics) the angles are calculated counter-clockwise, so rotating the path by 90 degrees would rotate the path to the left. this function changes the actual path resource, and so will permanently affect how the path is used by all instances in the game from the moment the function is used until the end of the game. if unnecessary, then use a function (like path_duplicate()) to create a copy of the path first, then call this function on the duplicated asset (call path_delete() on the asset when it is no longer required). note once a path has been assigned to an instance using the path_start() function, you can use the path_orientation variable to change the path rotation too."
-      },
-      "sheet": "Paths",
-      "metadata": {}
+  "data": {
+    "id": "Physics",
+    "text": {
+      "Definition": "this function can be used to set custom mass and rotational inertia values for a physics enabled instance. normally the mass, centre of mass, and rotational inertia for an instance are calculated using a combination the surface area of the bound fixtures and their density.",
+      "Examples": "physics_mass_properties(70, -4, 0, 2.5);",
+      "Examples Explanation": "This sets the mass to 70kg, shifts the center of mass 4 pixels left, and sets rotational inertia to 2.5.",
+      "Function": "physics_mass_properties",
+      "Returns": "N/A",
+      "Syntax": "physics_mass_properties(mass, local_center_x, local_center_y, inertia);"
     },
-    {
-      "id": "Path",
-      "text": {
-        "Syntax": "path_orientation;",
-        "Definition": "this variable holds the current orientation of the path that has been assigned to the instance when the function path_start() was called. when a path is created, its orientation is the default 0 degrees, but you can set this value to anything you wish using this. in gamemaker (unless you are using physics) the angles are calculated counter-clockwise, so setting the path orientation to 90° would rotate the path to the left."
-      },
-      "sheet": "Paths",
-      "metadata": {}
-    },
-    {
-      "id": "Object",
-      "text": {
-        "Syntax": "object_get_physics(obj);",
-        "Definition": "this function will tell you whether the object you are checking has been flagged as \"physics enabled\" - in which case it'll return true, - or not - in which case it will return false."
-      },
-      "sheet": "Object",
-      "metadata": {}
-    },
-    {
-      "id": "Object",
-      "text": {
-        "Syntax": "object_get_solid(obj);",
-        "Definition": "this function will tell you whether the object you are checking has been flagged as \"solid\" or not. a solid object generates a special collision event when using the traditional collision system (ie: the physics world is off). you can have a solid object and a normal instance of the same object and vice-versa. you set an individual instances solid flag using the solid instance variable."
-      },
-      "sheet": "Object",
-      "metadata": {}
-    },
-    {
-      "id": "Physics",
-      "text": {
-        "Syntax": "physics_mass_properties(mass, local_center_x, local_center_y, inertia);",
-        "Definition": "this function can be used to set custom mass and rotational inertia values for a physics enabled instance. normally the mass, centre of mass, and rotational inertia for an instance are calculated using a combination the surface area of the bound fixtures and their density. however, in very special occasions, you may need to offset the centre of mass or change the inertia, and that is when you would use this function. mass the mass is calculated in real world weight (i.e.: kilograms), so you should always try and keep values realistic for what you are modelling. so if your physics object is meant to represent a person, their mass could be, say, 70 kg, instead of something like 2 kg. the mass cannot be negative. centre of mass the centre of mass is calculated automatically for you based on the shape of the fixture (or fixtures) you have defined. to get a general idea of where this could be, if you have a sprite that is the same shape as the fixtures you wish to create, then select the \"centre origin\" option and you will see approximately where the centre of mass will be too. however, this may not be correct or you may be looking for a specific effect from your physics object, in which case this function can also be used to change the x and y coordinates for the centre of mass. these are local/relative values, so 0,0 is the point at which the fixtures are bound to the instance (the origin of the instance). so a centre of mass of -4,0 would shift the centre of mass to the left of the origin, by 4 pixels. rotational inertia the inertia value defines how resistant this instance is to changes in its rotational velocity. a higher inertia makes it more resistant and a low inertia makes it less resistant. the rotational inertia cannot be negative. note this function does not set mass and inertia for individual fixtures, but rather for the whole physics enabled instance, no matter how many fixtures are bound to it. note this function should only be used when necessary, as the physics simulation is designed for the mass and inertia to be optimal based on the density and size of the fixture. changing these values may produce unexpected results."
-      },
-      "sheet": "Physics",
-      "metadata": {}
-    }
-  ],
-  "meta": {
-    "page": 1,
-    "total": 135,
-    "page_size": 5,
-    "total_pages": 27,
-    "current_file": "Full_Example_Data_text.jsonl",
-    "search_query": "Physics",
-    "filters_applied": {
-      "text": {}
-    }
+    "sheet": "Physics",
+    "metadata": {}
   },
+  "meta": null,
   "errors": null
 }
 ```
 
+### **Record Not Found Response (404):**
+```bash
+GET /v1/records/NonExistentID
+```
 
-### **`meta` Object**
-- **`page`**: Current page number
-- **`page_size`**: Records per page requested
-- **`total`**: Total records matching the `record_id` 
-- **`total_pages`**: Total pages available
-- **`current_file`**: Cconfirms active dataset
-- **`search_query`**: Shows applied search term (or null if not used)
-- **`filters_applied`**: Text Field Filters (I haven't tested)
+**Error Response:**
+```json
+{
+  "detail": "Record not found: NonExistentID"
+}
+```
 
-text.Function=value - filters records where Function field contains "value"
-text.Definition=value - filters records where Definition field contains "value"
-text.Syntax=value - filters records where Syntax field contains "value"
+## **Response Structure**
+
+### **Success Response**
+- **`data`**: Single record object containing:
+  - **`id`**: The record's unique identifier
+  - **`sheet`**: Source sheet/category 
+  - **`text`**: Object containing all available text fields for this dataset
+  - **`metadata`**: Additional metadata fields (if any)
+- **`meta`**: Always null for this endpoint
+- **`errors`**: Always null on success
+
+### **Key Differences from `/v1/records`**
+- **No pagination** - Returns single record only
+- **No query parameters** - Only path parameter `{record_id}`
+- **No filtering** - Direct ID lookup only
+- **All text fields included** - Cannot select specific fields
+- **404 on not found** - Returns error instead of empty array
+- **No meta information** - No pagination or search metadata
+
+## **Use Cases**
+- **Direct record access** when you know the exact record ID
+- **Record detail pages** in applications
+- **API integrations** requiring specific record data
+- **Bookmarking** or linking to specific records
