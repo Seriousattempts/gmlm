@@ -1,0 +1,8 @@
+{
+  "model_name": "BAAI/bge-small-en-v1.5",
+  "embedding_dimension": 384,
+  "num_embeddings": 6979,
+  "source_folder": "-Manual",
+  "num_source_files": 10,
+  "created_at": "2025-08-05T23:56:03.962788"
+}
