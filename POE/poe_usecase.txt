@@ -1,0 +1,15 @@
+
+
+
+2023 GameMaker references
+
+POE
+https://poe.com/ibobthebuilder
+
+If 2023 docs doesn't work, you can make a poe bot
+https://creator.poe.com/docs/
+https://creator.poe.com/docs/server-bots/quick-start
+
+You can have your bot that's deployed to modal (or any cloud provider)
+- Make HTTP requests from any API | https://rapidapi.com/Seriousattempts/api/gml_mserver
+- Generate code based on POST and GET commands that will be used a documentation instead of internal LLM's training
