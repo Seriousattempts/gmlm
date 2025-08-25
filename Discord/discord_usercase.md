@@ -153,9 +153,9 @@ https://www.freepublicapis.com/deck-of-cards
 https://boardgamegeek.com/thread/3414659/what-games-can-be-created-and-played-on-discord
 - DECKED OUT MAZE (n8n)
 
-2. YuGiOh Discord Game
+2. YuGiOh Discord Game 
 - https://ygoprodeck.com/premium/
-- https://poe.com/YGOPRODeckAPIv7
+- https://poe.com/YGOPRODeckAPIv7 | https://github.com/Seriousattempts/gmlm/blob/main/Discord/YGOProDeck_cardset.py
 
 
 ## You vs LLM
@@ -164,6 +164,7 @@ YGOProDeck_cardset.py
 Build with GameMaker Roles
 - Build with restraints of last Melee Tournament results
 - Build it right into discord, he's an example https://top.gg/bot/812323565012647997
+
 
 
 
