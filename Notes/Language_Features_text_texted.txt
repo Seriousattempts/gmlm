@@ -1,0 +1,18 @@
+{
+  "text": {
+    "text_fields": [
+      "Definition",
+      "Explaining Fifth Code Example (if Any)",
+      "Explaining First Code Example",
+      "Explaining Fourth Code Example (if Any)",
+      "Explaining Second Code Example (if Any)",
+      "Explaining Third Code Example (if Any)",
+      "Fifth Code Example (if Any)",
+      "First Code Example",
+      "Fourth Code Example (if Any)",
+      "Second Code Example (if Any)",
+      "Term",
+      "Third Code Example (if Any)"
+    ]
+  }
+}
