@@ -8,7 +8,7 @@ Rapid Developers:
 
 Youtube :
 - https://rapidapi-discord-quiz-2-shots.lovable.app?via=oneshots
-- https://www.perplexity.ai/search/make-a-discord-bot-that-gives-_0XoweIMQQmQg0pvnfi44A?referral_code=F9GBX71H
+- https://www.perplexity.ai/search/make-a-discord-bot-that-gives-_0XoweIMQQmQg0pvnfi44A?referral_code=F9GBX71H?wpsrc=dub_co&wpcn={via}&wpcl={dub_id}
 
 
 ## Chrome Extensions
@@ -75,6 +75,7 @@ Can be done on a RetroPie https://retropie.org.uk/
 
 - Epic Game Store
 -- https://www.home-assistant.io/integrations/epic_games_store
+
 
 
 
