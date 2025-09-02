@@ -28,7 +28,7 @@ Now what can we do with it? [But I decided to test software to think of possible
 - Discord | https://github.com/Seriousattempts/gmlm/blob/main/Discord/discord_usercase.md
 - Lovable | https://github.com/Seriousattempts/gmlm/blob/main/LOVABLE/lovable_usecase.md
 - Model Context Protocol | https://github.com/Seriousattempts/gmlm/blob/main/MCP/mcp_usecase.md
-- n8n | https://github.com/Seriousattempts/gmlm/tree/main/n8n
+- n8n | https://github.com/Seriousattempts/gmlm/blob/main/n8n/n8n_usecase.md
 
 How about something more daring if you're the type to let your computer be accessed by LLMs through your device (Local or API, you're clearly a LMSoaker)
 ## DIAMBRA https://github.com/diambra
